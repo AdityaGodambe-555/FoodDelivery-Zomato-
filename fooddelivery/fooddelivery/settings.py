@@ -140,11 +140,9 @@ MEDIA_URL='/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
         
 #EMAIL SETTINGs
-#shopit password
-# jzrz atnp jqlz jirr
 EMAIL_HOST="smtp.gmail.com"
 EMAIL_HOST_USER="godambeaditya@gmail.com"
-EMAIL_HOST_PASSWORD="jzrz atnp jqlz jirr"
+EMAIL_HOST_PASSWORD="#"
 EMAIL_PORT='587'
 EMAIL_USE_TLS=True
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
