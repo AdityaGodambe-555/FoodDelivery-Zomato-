@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block 'main' %}
+                <div class="bg-danger text-center">
+                    <h2 class='text-white p-2'>Your Orders</h2>
+                </div>
+                {% for x in data %}
+                <div class="row mt-2">
+                    
+                    <div class="col-md-3 text-center m-2">
+                        <img src="/media/{{ x.pid.product_image }}" alt="mac" class="img-fluid">
+                    </div><!--Product Image END-->
+                    <div class="col-md-6">
+                        <table class="table">
+                              <tr>
+                                <th>Product Name</th>
+                                <td>{{ x.pid.name }}</td>
+                              </tr>
+                              <tr>
+                                <th>Description</th>
+                                <td>{{ x.pid.detail }}</td>
+                              </tr>
+                              <tr>
+                                <th>Price</th>
+                                <td class="text-strong">&#8377; {{ x.pid.price }}</td>
+                              </tr>
+                              <tr>
+                                <th>Quantity</th>
+                                <td class="d-flex gap-2">
+                                    <p class="alert alert-light d-flex align-items-center"  style=" width: 40px; height:32px;">{{x.quantity}}</p>
+                                </td>
+                              </tr>
+                        </table>
+                    </div>
+                </div><!--Product Details End-->
+                {% endfor %}
+
+{% endblock 'main' %}
+
+

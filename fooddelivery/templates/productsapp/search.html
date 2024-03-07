@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'main' %}
+
+<div class="container">
+    <div class="row bg-danger text-center">
+        <h1>
+            Result For Search: {{query}}
+        </h1>
+    </div>
+    <div class="row d-felx justify-content-center">
+            {% for x in data %}
+                <div class="col-md-3 mt-3">
+                            <div class="card text-center " style="width: 18rem; height: 58vh;">
+                                <img src="/media/{{ x.product_image }}" class="card-img-top" alt="..." height="150vh">
+                                <div class="card-body">
+                                <h5 class="card-title" style="height: 7vh" >{{x.name}}</h5>
+                                <p class="card-text"  style="height: 1vh">&#8377;.&nbsp;{{x.price}}</p>
+                                <p class="card-text"  style="height: 15vh">{{x.detail}}</p>
+                                    {% if vmsg and  pid|stringformat:"s" == x.id|stringformat:"s" %}
+                                        <p class="alert alert-warning">{{vmsg}}</p>
+                                        {% elif success and  pid|stringformat:"s" == x.id|stringformat:"s" %}
+                                        <p class="alert alert-success">{{success}}</p>
+                                        {% else %}
+                                        <a href="/cartapp/addcart?z=2&pid={{x.id}}&q={{x.cat}}&query={{query}}" class="btn btn-danger align-items-end">Add to Cart</a>
+                                    {% endif %}                                
+                                </div>
+                            </div>
+                </div>
+            {% endfor %}                
+    </div>
+</div>
+
+{% endblock 'main' %}

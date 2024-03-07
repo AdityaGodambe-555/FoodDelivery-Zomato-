@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'main' %}
+    
+
+<div class="container-fluid text-center"> <!--top list-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" style="background-color:#ffc6c6;">
+				<div class="col-md-12 text-center pt-2">
+							<h1 class="mb-5">Inspiration For Your Order</h1>
+							<div class="row" >
+								<div class="col-md-12 d-flex justify-content-center">
+									<div class="col-md-2">
+                                        <a href="/category?q=1" class="btn btn-white">
+										<img src="{% static "image/pizza.jpg" %}" class="rounded-circle mb-3" alt="Pizza" width="60%">
+										 <p>
+											 Pizza
+										 </p> 
+                                        </a>
+									</div>
+									<div class="col-md-2">
+                                        <a href="/category?q=2" class="btn btn-white">
+                                        <img src="{% static "image/cake.jpg" %}" class="rounded-circle mb-3" alt="Cake" width="60%">
+										 <p>
+											Cake
+										 </p>
+                                        </a> 
+									</div>
+									<div class="col-md-2">
+                                        <a href="/category?q=3" class="btn btn-white"> 
+										<img src="{% static "image/chicken.jpg" %}" class="rounded-circle mb-3" alt="Chicken" width="60%">
+                                        <p>
+											Chicken	
+                                        </p> 
+                                        </a>
+									</div>
+									<div class="col-md-2">
+                                        <a href="/category?q=4" class="btn btn-white">
+                                        <img src="{% static "image/sandwich.jpg" %}" class="rounded-circle mb-3" alt="Sandwich" width="60%">
+										 <p>
+											Sandwich
+										 </p> 
+                                        </a>
+									</div>
+									<div class="col-md-2">
+                                        <a href="/category?q=5" class="btn btn-white">
+										<img src="{% static "image/burger.jpg" %}" class="rounded-circle mb-3" alt="Roll" width="60%">
+										 <p>
+											Burger
+										 </p> 
+                                        </a>
+									</div>
+								</div>
+							</div>
+				</div>
+			</div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid text-center my-2">
+    <div class="row py-3">
+        <h1>ORDER NOW in Mumbai</h1>
+    </div>
+    <div class="row  ">
+        
+        <div class="col-md-12 d-flex justify-content-center">
+            <div class="row d-flex justify-content-center gap-5">
+                {% for x in data %}
+                        <div class="col-md-3" style="margin-right:10px">
+                            <div class="card text-center " style="width: 18rem; height: 58vh;">
+                                <img src="/media/{{ x.product_image }}" class="card-img-top" alt="..." height="150vh">
+                                <div class="card-body">
+                                <h5 class="card-title" style="height: 7vh" >{{x.name}}</h5>
+                                <p class="card-text"  style="height: 1vh">&#8377;.&nbsp;{{x.price}}</p>
+                                <p class="card-text"  style="height: 15vh">{{x.detail}}</p>
+                                    {% if vmsg and  pid|stringformat:"s" == x.id|stringformat:"s" %}
+                                        <p class="alert alert-warning">{{vmsg}}</p>
+                                        {% elif success and  pid|stringformat:"s" == x.id|stringformat:"s" %}
+                                        <p class="alert alert-success">{{success}}</p>
+                                        {% else %}
+                                        <a href="/cartapp/addcart?z=0&pid={{x.id}}&q={{x.cat}}" class="btn btn-danger align-items-end">Add to Cart</a>
+                                    {% endif %}                                
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+            </div>
+        </div>
+        
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock 'main' %}

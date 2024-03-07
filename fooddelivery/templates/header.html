@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <title>Zomato</title>
+</head>
+<body>
+    <!--HEADER-->
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-md-12 d-flex justify-content-center">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                        {% if request.user.is_authenticated %}
+                        <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
+                            <a href="/dashboard">
+                                <img src="{% static "image/zomato_foot.jpg" %}" alt="ZOMATO" width="140vw" class="mx-5">
+                            </a>
+                        {% else %}
+                        <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
+                            <a href="/">
+                                <img src="{% static "image/zomato_foot.jpg" %}" alt="ZOMATO" width="140vw" class="mx-5">
+                            </a>
+                        {% endif %}           
+                            <div class="col-md-8 mx-3 mt-3">
+                                <div class="input-group mb-3 mx-4">
+                                <form class="d-flex" method="get" action="/search">
+                                <input type="text" class="form-control" id="productSearch" placeholder="Search For Cuisine and Dish" name="query">
+                                <button class="btn btn-danger me-5" >Search</button>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% if request.user.is_authenticated %}
+                        <div class=" collapse navbar-collapse navbar-nav mx-5">
+                            <span class="nav-item ">
+                                <h6>Welcome, <strong>{{user.username}}</strong></h6>
+                            </span>
+                        </div>
+                        <div class=" collapse navbar-collapse navbar-nav mx-5">
+                            <a href="/cartapp?uid=user.id" class="btn btn-primary nav-item "> 
+                                <strong>
+                                    {{quantity}}
+                                </strong>&nbsp;
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M8 16L16.7201 15.2733C19.4486 15.046 20.0611 14.45 20.3635 11.7289L21 6" stroke="#d0021b" stroke-width="1.5" stroke-linecap="round"/>
+                                    <path d="M6 6H22" stroke="#d0021b" stroke-width="1.5" stroke-linecap="round"/>
+                                    <circle cx="6" cy="20" r="2" stroke="#d0021b" stroke-width="1.5"/>
+                                    <circle cx="17" cy="20" r="2" stroke="#d0021b" stroke-width="1.5"/>
+                                    <path d="M8 20L15 20" stroke="#d0021b" stroke-width="1.5" stroke-linecap="round"/>
+                                    <path d="M2 2H2.966C3.91068 2 4.73414 2.62459 4.96326 3.51493L7.93852 15.0765C8.08887 15.6608 7.9602 16.2797 7.58824 16.7616L6.63213 18" stroke="#d0021b" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                               </a>
+                               <a href=/payapp/orderview?order_id={{uorderid.id}}><p class='btn btn-primary m-3' >Your Orders</p></a>
+
+                        </div>
+                        <div class=" collapse navbar-collapse navbar-nav mx-5">
+
+                            <a href="/authapp/logout/" class="btn btn-danger nav-item ">
+                                Logout
+                            </a>
+                        </div>
+                        {% endif %}
+                </nav>
+            </div>
+        </div>
+    </div>

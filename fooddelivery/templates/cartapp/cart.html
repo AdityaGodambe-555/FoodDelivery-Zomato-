@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'main' %}
+
+<div class="container">
+                             <!-- Main Start-->
+            <div class="row">
+                <h1>Secure Checkout</h1>
+            </div>
+            <div class="row my-2">
+
+                <div class="col-md-8">
+                    <table class="table">
+                        <tr>
+                            <th class='text-secondary'>Customer Details</th>
+                        </tr>
+                        <tr>
+                            <th>Name:</th>
+                            <td>{{request.user.username}}</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>{{request.user.email}}</td>
+                        </tr>
+                        <tr>
+                            <th>Delivery Address:</th>
+                            <td>Room No. 4 ,Three Story Bulding,Pochinki</td>
+                        </tr>
+                        <tr>
+                            <th>Pincode:</th>
+                            <td>400086</td>
+                        </tr>
+                    </table>
+                </div><!--USER DETAILS END-->
+                <div class="col-md-4">
+                  <table class="table">
+                      <tr>
+                          <th class="text-secondary">Price Details</th>
+                      </tr>
+                       {% for x in data %}
+                      <tr>
+                          <th>{{x.pid.name}} ({{x.qty}} Item):</th>
+                          <td>{{ x.qty }}x&nbsp;&#8377;{{ x.pid.price }}</td>
+                      </tr>
+                      {% endfor %}
+                      <tr>
+                          <th>Total Amount: {{ quantity }} Items</th>
+                          <td>&#8377; {{total|floatformat:2}}</td>
+                      </tr>
+                      <tr>
+                          <td><a href="/payapp/pay?co={{quantity}}&to={{total}}" class="btn btn-primary">PLACE ORDER</a></td>
+                      </tr>
+                  </table>
+              </div>
+                <div class="bg-danger ">
+                    <h4 class='text-white'>Cart Summary</h4>
+                </div>
+                {% for x in data %}
+                <div class="row mt-2">
+
+                    <div class="col-md-3">
+                        <img src="/media/{{ x.pid.product_image }}" alt="mac" class="img-fluid">
+                    </div><!--Product Image END-->
+                    <div class="col-md-6">
+                        <table class="table">
+                            <tr>
+                                <th>Product Name</th>
+                                <td>{{ x.pid.name }}</td>
+                              </tr>
+                              <tr>
+                                <th>Description</th>
+                                <td>{{ x.pid.detail }}</td>
+                              </tr>
+                              <tr>
+                                <th>Price</th>
+                                <td class="text-strong">&#8377; {{ x.pid.price }}</td>
+                              </tr>
+                              <tr>
+                                <th>Quantity</th>
+                                <td class="d-flex gap-2">
+                                    <a href="updateqty?q=0&cid={{x.id}}" class="btn btn-danger d-flex align-items-center" style="height: 32px;">-</a>
+                                    <p class="alert alert-light d-flex align-items-center"  style=" width: 40px; height:32px;">{{x.qty}}</p>
+                                    <a href="updateqty?q=1&cid={{x.id}}" class="btn btn-success d-flex align-items-center" style="height: 32px;">+</a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><a href='/cartapp/removeitem?pid={{x.pid.id}}'><button class="btn btn-danger">Remove</button></a></td>
+                              </tr>
+                        </table>
+                    </div>
+                </div><!--Product Details End-->
+                {% endfor %}
+            </div>
+            <!--Main End-->
+    </div>
+
+{% endblock 'main' %}

@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}"> 
+    <title>Zomato | Login</title>
+</head>
+<body>
+    <div class="container-fluid bg_img" style="height: 100vh ;" >
+        <div class="row">
+            <div class="col-sm-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                          <a class="nav-item nav-link me-auto white-text"  href="#"> 
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-down-fill" viewBox="0 0 16 16">
+                                  <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2m2.354 6.854-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708"/>
+                              </svg>
+                              Get the App
+                          </a>
+                          <ul class="navbar-nav mb-2 mb-lg-0 d-flex gap-5">
+                              <li class="nav-item">
+                                  <a class="nav-link white-text" href="/"><span>HOME</span></a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link white-text" href="/authapp/register"><span>New User ?</span>&nbsp;Register</a>
+                              </li>
+                          </ul>
+                        </div>
+                      </div>
+                  </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mx-auto my-auto mt-5 p-5">
+                    <div class="mb-3 d-flex justify-content-center white-text">
+                        <h3>USER | <span class="text-danger">Login</span></h3>
+                    </div>
+                    <form method="post" action="/authapp/login/">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="Input1" class="form-label"><strong class="white-text">Username :</strong></label>
+                            <input type="text" class="form-control" name="uname" id="Input1" placeholder="Enter Username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Input2" class="form-label"><strong class="white-text">Password :</strong></label>
+                            <input type="password" class="form-control" id="Input2" name="upass" placeholder="Enter Password">
+                        </div>
+                        <div class="mb-3 d-flex justify-content-center gap-2 align-items-center">
+                            <input type="submit" class="btn btn-danger" value="Login">
+                        </div>
+                    </form>
+                        {% if errmsg %}
+                        <div class="mb-3 d-flex justify-content-center gap-2 align-items-center alert alert-danger">
+                            <h4>{{errmsg}}</h4>
+                        </div>
+                        {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static "js/poper.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/script.js" %}"></script>
+</body>
+</html>

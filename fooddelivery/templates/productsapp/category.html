@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'main' %}
+
+<div class="container">
+    <div class="row bg-danger text-center">
+        <h1>
+            {% for x in data %}
+                {% if forloop.first %}
+                    {% if x.cat == 1 %}
+                       <a href="/category?q=1" class="btn text-white"> <h1>Pizza's</h1></a>
+                    {% elif x.cat == 2 %}
+                        <a href="/category?q=2" class="btn text-white"> <h1>Cake's</h1></a>
+                    {% elif x.cat == 3 %}
+                        <a href="/category?q=3" class="btn text-white"> <h1>Chicken's</h1></a>
+                    {% elif x.cat == 4 %}
+                        <a href="/category?q=4" class="btn text-white"> <h1>Sandwich's</h1></a>
+                    {% elif x.cat == 5 %}
+                        <a href="/category?q=5" class="btn text-white"> <h1>Burger's</h1></a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}    
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-md-3 p-3 mt-4 rounded-md" style="height: fit-content; background-color:#fff1f1;"><!--SideBar-->
+            {% for x in data %}
+                {% if forloop.first and x.cat != 3 %}
+                <h5>Filter By VEG or Non-VEG</h5>
+                <hr>
+                <p><a href="/filter?q=1&x={{ x.cat }}" class="underline text-success"><strong>VEG</strong></a></p>
+                 <p><a href="/filter?q=2&x={{ x.cat }}" class="underline text-danger"><strong>Non-VEG</strong></a></p>
+                {% endif %}
+            {% endfor %}
+            {% for x in data %}
+            {% if forloop.first %}
+            <h5>Sort By Price</h5>
+            <hr>
+            <p><a href="/sort?q=0&x={{ x.cat }}" class="underline" ><strong>Low to High</strong></a></p>
+            <p><a href="/sort?q=1&x={{ x.cat }}" class="underline" ><strong>High to Low</strong></a></p>
+            {% endif %}
+            {% endfor %}
+            {% for x in data %}
+            {% if forloop.first %}
+            <h5>Filter By Price Range</h5>
+            <hr>
+            <form method="get" action="/range">
+                <input type="hidden" name="x" value="{{ x.cat }}">
+                <div class="mb-3">
+                    <div class="d-inline-flex align-items-center">
+                        <label for="Input1" class="form-label pe-5"><strong>Min:</strong></label>
+                        <input type="number" class="form-control" id="Input1" name='min' placeholder="Min .Value">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-inline-flex align-items-center">
+                        <label for="Input2" class="form-label pe-5"><strong>Max:</strong></label>
+                        <input type="number" class="form-control" id="Input2" name='max' placeholder="Max .Value" >
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" class="btn btn-danger" value="Filter" >
+                </div>
+            </form>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col-md-9 mt-4">
+                    <div class="row d-flex justify-content-center gap-5">
+                        {% for x in data %}
+                        <div class="col-md-3" style="margin-right:10px">
+                            <div class="card text-center " style="width: 18rem; height: 58vh;">
+                                <img src="/media/{{ x.product_image }}" class="card-img-top" alt="..." height="150vh">
+                                <div class="card-body">
+                                <h5 class="card-title" style="height: 7vh" >{{x.name}}</h5>
+                                <p class="card-text"  style="height: 1vh">&#8377;.&nbsp;{{x.price}}</p>
+                                <p class="card-text"  style="height: 15vh">{{x.detail}}</p>
+                                    {% if vmsg and  pid|stringformat:"s" == x.id|stringformat:"s" %}
+                                        <p class="alert alert-warning">{{vmsg}}</p>
+                                        {% elif success and  pid|stringformat:"s" == x.id|stringformat:"s" %}
+                                        <p class="alert alert-success">{{success}}</p>
+                                        {% else %}
+                                        <a href="/cartapp/addcart?z=1&pid={{x.id}}&q={{x.cat}}" class="btn btn-danger align-items-end">Add to Cart</a>
+                                    {% endif %}                                
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}                
+                    </div>
+        </div>
+    </div>
+</div>
+
+{% endblock 'main' %}
