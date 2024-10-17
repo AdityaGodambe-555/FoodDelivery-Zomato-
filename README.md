@@ -4,6 +4,9 @@
 
 - Web Stack: Python with Django framework (back end), HTML, CSS, JavaScript (front end), MySQL (DBMS).
 
+## Demo Video
+https://github.com/AdityaGodambe-555/FoodDelivery-Zomato-/assets/96347250/e081ce84-b050-4092-a480-9cde87c83d98
+
 ## Features
 
 - Authentication functionality (login, register, logout)
@@ -18,10 +21,3 @@
 To get the project up and running on your local machine:
 
  Clone the repository: `git clone https://github.com/AdityaGodambe-555/FoodDelivery-Zomato-.git`
-
-
-
-
-
-https://github.com/AdityaGodambe-555/FoodDelivery-Zomato-/assets/96347250/e081ce84-b050-4092-a480-9cde87c83d98
-
